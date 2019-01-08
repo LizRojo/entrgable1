@@ -1,61 +1,74 @@
-var tabla=[
-    {nombre:"Ricardo", apellidos:"Juarez Ramirez",genero:"Masculino",fech_nac:"01/05/1996",correo:"RJR@gmail.com"},
-    {nombre:"Josue", apellidos:"Salazar Castro",genero:"Masculino",fech_nac:"14/06/1997",correo:"JSC@gmail.com"}
+var app = angular.module('myApp', []);
+  app.controller('formCtrl', function($scope) {
+  var datoid = 3;
+      $scope.datos= [
+              {id:0,nombre:"Ricardo", apellidos:"Juarez Ramirez",genero:"Masculino",fech_nac:"01/05/1996",correo:"RJR@gmail.com"},
+              {id:1, nombre:"Josue",apellidos:"Salazar Castro",genero:"Masculino",fech_nac:"14/06/1997",correo:"JSC@gmail.com"},
+              {id:2,nombre:"Estela", apellidos:"Castro Reyes",genero:"Femenino",fech_nac:"01/06/1997",correo:"ecr@gmail.com"}];
+         
+              $scope.agregar = function () {
+               
+                if ($scope.nuevodato.id == null) {
+                    if($scope.nuevodato.nombre==""||$scope.nuevodato.nombre==null) {alert("Ingresa un nombre")}else
+                    if($scope.nuevodato.apellidos==""||$scope.nuevodato.apellidos==null) {alert("Ingresa apellidos")}else
+                    if($scope.nuevodato.genero==""||$scope.nuevodato.genero==null) {alert("Selecciona genero")}else
+                    if($scope.nuevodato.fech_nac==""||$scope.nuevodato.fech_nac==null) {alert("Ingresa fecha de nacimiento")}else
+                    if($scope.nuevodato.correo==""||$scope.nuevodato.correo==null) {alert("Ingresa correo electronico")}
+                    else{
+                    $scope.nuevodato.id = datoid++;
+                     $scope.datos.push($scope.nuevodato);
+                    }
+                } else {
     
-];
- 
-window.onload=cargar;
-function cargar(){
-  
-  mostrarLista();
-  document.getElementById("eliminar").addEventListener("click",eliminar,false);
-   document.getElementById("agregar").addEventListener("click",nuevo,false);
-   
-}
-function mostrarLista(){
-  ordena();
-  var cuerpo= document.getElementById("datos");
-  var llenado="";
-  for(var i=0;i<tabla.length;i++){
-   
-    llenado+="<tr><td>"+tabla[i].nombre+"</td><td>"+tabla[i].apellidos+"</td><td>"+tabla[i].genero+"</td><td>"+tabla[i].fech_nac+"</td><td>"+tabla[i].correo+" </td></tr>";
     
-  }
+    
+                    for (i in $scope.datos) {
+                       
+                        if ($scope.datos[i].id == $scope.nuevodato.id) {
+    
+                            $scope.datos[i] = $scope.nuevodato;
+    
+                        }
+    
+                    }
+    
+                }
+    
+                $scope.nuevodato = {};
+    
+              
+          }
+           $scope.eliminar = function (id) {
+                  for (i in $scope.datos) {
   
-  cuerpo.innerHTML=llenado;
-}
-
-function nuevo(event){
-  event.preventDefault();
-  var nuevonombre=document.getElementById("nombre").value;
-  var nuevoapellido=document.getElementById("apellido").value;
-  var nuevoFecha=document.getElementById("fecha").value;
-  var nuevocorreo=document.getElementById("correo").value;
-  var listaGenero = document.getElementById("opciones");
-  var Seleccionado = listaGenero.selectedIndex;
-  var opcionSeleccionada = listaGenero.options[Seleccionado];
-  var nuevogenero = opcionSeleccionada.text;
-  //indice = document.getElementById("opciones").selectedIndex;
-  if(nuevonombre.length==0){alert("Ingresa nombre")}
-  else if(nuevoapellido.length==0){alert("Ingresa Apellidos")}
-  else if( Seleccionado == null || Seleccionado == 0 ) {
-    alert("Selecciona el genero");
-  }else  if(!(/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(nuevocorreo))){alert("Ingresa un correo")}else{
-  var nuevo={nombre:nuevonombre, apellidos:nuevoapellido,genero:nuevogenero,fech_nac:nuevoFecha,correo:nuevocorreo};
-  tabla.push(nuevo);
-  ordena();
-   mostrarLista();}
-}
-
-function ordena(){
-  tabla.sort(function(a,b){
-    if(a.nombre<b.nombre){return -1;}else{return 1;} return 0;
+                  if ($scope.datos[i].id == id) {
+  
+                      $scope.datos.splice(i, 1);
+  
+                      $scope.nuevodato = {};
+  
+                  }
+  
+              }
+  
+  
+  
+          }
+           $scope.editar = function (id) {
+  
+              for (i in $scope.datos) {
+  
+                  if ($scope.datos[i].id == id) {
+  
+                      $scope.nuevodato = angular.copy($scope.datos[i]);
+  
+                  }
+  
+              }
+  
+          }
+  
   });
-}
-function eliminar(){
-  tabla.pop();
-mostrarLista();
-}
 /*
 <!DOCTYPE html>
 <html lang="en">
