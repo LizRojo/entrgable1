@@ -1,0 +1,9 @@
+INSTRUCCIONES
+
+-Ejecutar el index
+-Se muestran los campos en los cuales se deberan ingresar
+ los datos personales para posterior agregarlos con el boton
+ -una vez agregado se mostrara automaticamente en la tabla
+ -Para su edicion cuenta con una imagen representativa que al darse click
+ muestra los datos en el formulario, los cuales al editar y darle agregar, mostrara el dato editado
+ -Tambien cuenta con una imagen representativa de eliminar la cual al darle click, elimina el registro de la tabla
