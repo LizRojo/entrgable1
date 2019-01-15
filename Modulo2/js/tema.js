@@ -1,0 +1,11 @@
+fetch('http://cursos.ectotec.com/javascript/api/temas')
+.then(res=>res.json())
+.then(data=>{
+  valor1.innerHTML=data[0].descripcion;
+  valor2.innerHTML=data[1].descripcion;
+  valor3.innerHTML=data[2].descripcion;
+console.log(data[0].descripcion);
+})
+enviar=function(){
+	alert(hola);
+}

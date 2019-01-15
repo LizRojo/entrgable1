@@ -4,20 +4,17 @@ $correo=$_POST['correo'];
 $fecha=$_POST['fecha'];
 $tema=$_POST['tema'];
 $comentario=$_POST['comentario'];
+$fecha_actual=date("d/m/Y H:i");
 
 //datos del correo
-
-$headers="De: $nombre \n";
-$headers .="Correo: $correo\n";
-$headers .="Fecha de nacimiento: $fecha\n";
-$headers.="Comentarios: $comentario\n";
-
+$cuerpo="De: $nombre \n";
+$cuerpo .="Correo: $correo\n";
+$cuerpo .="Fecha y hora de envio: $fecha_actual\n";
+$cuerpo .="Fecha de nacimiento: $fecha\n";
+$cuerpo.="Comentarios: $comentario\n";
  
-
-if(@mail('lvrojo31@gmail.com',$asunto,$headers)){
+if(mail('correo@gmail.com',$tema,$cuerpo)){
     echo "enviado";
     header('Location:mensaje.html');
 }else{echo "error";}
-
-
 ?>

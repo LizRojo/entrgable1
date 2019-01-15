@@ -1,0 +1,5 @@
+Instrucciones
+-Alojar en un hosting la solucion 
+-abrir el archivo envio.php e ingresar el mail en  la linea 16 "mail" donde dice correo
+-ejecutar el index y llenar todos los campos
+-se abrira un modal que al aceptar se enviara el correo y mostrara el mensaje de enviado
